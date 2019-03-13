@@ -11,6 +11,8 @@ var (
 	ErrNotFound      = errors.New("not found")
 	ErrAlreadyExists = errors.New("already exists")
 	ErrInvalidData   = errors.New("invalid data")
+
+	deleteAccountAfter = time.Minute * 15
 )
 
 type Service struct {
@@ -34,6 +36,12 @@ func (s *Service) AccountAdd(account Account) error {
 		return ErrAlreadyExists
 	}
 	s.accounts[account.Name] = &account
+	go func() {
+		<-time.After(deleteAccountAfter)
+		s.mutex.Lock()
+		defer s.mutex.Unlock()
+		delete(s.accounts, account.Name)
+	}()
 	return nil
 }
 
