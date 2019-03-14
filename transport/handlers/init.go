@@ -6,10 +6,12 @@ import (
 
 type Handlers struct {
 	service *app.Service
+	flag    string
 }
 
-func New(service *app.Service) *Handlers {
+func New(service *app.Service, flag string) *Handlers {
 	return &Handlers{
 		service: service,
+		flag:    flag,
 	}
 }

@@ -27,7 +27,7 @@ func (h *Handlers) AccountGet(w http.ResponseWriter, r *http.Request) {
 		Account: account,
 	}
 	if flag {
-		response.Flag = "confidence{some_nice_text}"
+		response.Flag = h.flag
 	}
 
 	w.Header().Set("Content-Type", "application/json")

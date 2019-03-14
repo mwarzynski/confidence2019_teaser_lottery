@@ -13,6 +13,7 @@ import (
 )
 
 var (
+	DefaultFlag          = "confidence{flag}"
 	DefaultListen        = ":8080"
 	DefaultLotteryPeriod = time.Minute * 10
 )
@@ -27,13 +28,18 @@ func main() {
 		listen = DefaultListen
 	}
 
+	flag := os.Getenv("FLAG")
+	if flag == "" {
+		flag = DefaultFlag
+	}
+
 	lotteryPeriod := DefaultLotteryPeriod
 	if d, err := time.ParseDuration(os.Getenv("LOTTERY_PERIOD")); err == nil {
 		lotteryPeriod = d
 	}
 
 	service := app.NewService(ctx, lotteryPeriod)
-	router := transport.InitRouter(service)
+	router := transport.InitRouter(service, flag)
 
 	timeout := time.Duration(time.Minute)
 	server := &http.Server{

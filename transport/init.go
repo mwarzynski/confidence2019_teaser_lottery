@@ -9,8 +9,8 @@ import (
 	"github.com/mwarzynski/confidence_web/transport/handlers"
 )
 
-func InitRouter(service *app.Service) http.Handler {
-	handler := handlers.New(service)
+func InitRouter(service *app.Service, flag string) http.Handler {
+	handler := handlers.New(service, flag)
 	r := chi.NewRouter()
 
 	r.Use(middleware.Logger)
