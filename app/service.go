@@ -16,7 +16,7 @@ var (
 )
 
 type Service struct {
-	accounts map[string]*Account
+	accounts map[string]Account
 	lottery  *Lottery
 
 	mutex sync.RWMutex
@@ -24,7 +24,7 @@ type Service struct {
 
 func NewService(ctx context.Context, lotteryPeriod time.Duration) *Service {
 	return &Service{
-		accounts: make(map[string]*Account),
+		accounts: make(map[string]Account),
 		lottery:  NewLottery(ctx, lotteryPeriod),
 	}
 }
@@ -35,7 +35,7 @@ func (s *Service) AccountAdd(account Account) error {
 	if _, found := s.accounts[account.Name]; found {
 		return ErrAlreadyExists
 	}
-	s.accounts[account.Name] = &account
+	s.accounts[account.Name] = account
 	go func() {
 		<-time.After(deleteAccountAfter)
 		s.mutex.Lock()
@@ -67,7 +67,7 @@ func (s *Service) AccountGet(name string) (Account, bool, error) {
 		return Account{}, false, ErrNotFound
 	}
 	superUser := s.lottery.IsWinner(name) || account.IsMillionaire()
-	return *account, superUser, nil
+	return account, superUser, nil
 }
 
 func (s *Service) LotteryAdd(name string) error {
@@ -77,7 +77,7 @@ func (s *Service) LotteryAdd(name string) error {
 	if !found {
 		return ErrNotFound
 	}
-	s.lottery.Add(*account)
+	s.lottery.Add(account)
 	return nil
 }
 
