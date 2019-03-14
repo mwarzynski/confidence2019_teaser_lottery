@@ -13,13 +13,18 @@ type ResponseLotteryResults struct {
 
 func (h *Handlers) LotteryResults(w http.ResponseWriter, r *http.Request) {
 	winners := h.service.LotteryResults()
-	var resp ResponseLotteryResults
-	for _, w := range winners {
+	resp := ResponseLotteryResults{
+		Winners: make([]string, 0, 0),
+	}
+	for _, winner := range winners {
 		h := md5.New()
-		io.WriteString(h, w)
+		if _, err := io.WriteString(h, winner); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		h.Sum(nil)
 		resp.Winners = append(resp.Winners, string(h.Sum(nil)))
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resp)
+	_ = json.NewEncoder(w).Encode(resp)
 }

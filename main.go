@@ -13,9 +13,11 @@ import (
 )
 
 var (
-	DefaultFlag          = "confidence{flag}"
-	DefaultListen        = ":8080"
-	DefaultLotteryPeriod = time.Minute * 10
+	DefaultFlag   = "confidence{flag}"
+	DefaultListen = ":8080"
+
+	DefaultLotteryPeriod      = time.Minute * 12
+	DefaultAccountRemoveAfter = time.Minute * 15
 )
 
 func main() {
@@ -37,8 +39,12 @@ func main() {
 	if d, err := time.ParseDuration(os.Getenv("LOTTERY_PERIOD")); err == nil {
 		lotteryPeriod = d
 	}
+	deleteAccountAfter := DefaultAccountRemoveAfter
+	if d, err := time.ParseDuration(os.Getenv("DELETE_ACCOUNT_AFTER")); err == nil {
+		deleteAccountAfter = d
+	}
 
-	service := app.NewService(ctx, lotteryPeriod)
+	service := app.NewService(ctx, lotteryPeriod, deleteAccountAfter)
 	router := transport.InitRouter(service, flag)
 
 	timeout := time.Duration(time.Minute)
