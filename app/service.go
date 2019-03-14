@@ -12,7 +12,7 @@ var (
 	ErrAlreadyExists = errors.New("already exists")
 	ErrInvalidData   = errors.New("invalid data")
 
-	deleteAccountAfter = time.Minute * 15
+	deleteAccountAfter = time.Hour
 )
 
 type Service struct {
