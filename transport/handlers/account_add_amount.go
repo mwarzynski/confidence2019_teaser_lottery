@@ -26,16 +26,14 @@ func (h *Handlers) AccountAddAmount(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := h.service.AccountAddAmount(chi.URLParam(r, "name"), req.Amount); err != nil {
-		cErr := errors.Cause(err)
-		if cErr == app.ErrNotFound {
+		switch errors.Cause(err) {
+		case app.ErrNotFound:
 			http.Error(w, err.Error(), http.StatusNotFound)
-			return
-		}
-		if cErr == app.ErrInvalidData {
+		case app.ErrInvalidData:
 			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
-			return
+		default:
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)

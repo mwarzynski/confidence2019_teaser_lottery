@@ -29,7 +29,6 @@ func (h *Handlers) AccountGet(w http.ResponseWriter, r *http.Request) {
 	if flag {
 		response.Flag = h.flag
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(response)
 }
