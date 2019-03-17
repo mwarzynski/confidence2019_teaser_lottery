@@ -52,8 +52,8 @@ func (s *Service) AccountAdd() (Account, error) {
 }
 
 func (s *Service) AccountAddAmount(name string, amount int) error {
-	s.mutex.RLock()
-	defer s.mutex.RUnlock()
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 	account, found := s.accounts[name]
 	if !found {
 		return ErrNotFound
