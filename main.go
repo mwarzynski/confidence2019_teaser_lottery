@@ -21,6 +21,7 @@ var (
 )
 
 func main() {
+	// Context.
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -29,12 +30,10 @@ func main() {
 	if listen == "" {
 		listen = DefaultListen
 	}
-
 	flag := os.Getenv("FLAG")
 	if flag == "" {
 		flag = DefaultFlag
 	}
-
 	lotteryPeriod := DefaultLotteryPeriod
 	if d, err := time.ParseDuration(os.Getenv("LOTTERY_PERIOD")); err == nil {
 		lotteryPeriod = d
@@ -44,9 +43,11 @@ func main() {
 		deleteAccountAfter = d
 	}
 
+	// Application service.
 	service := app.NewService(ctx, lotteryPeriod, deleteAccountAfter)
 	router := transport.InitRouter(service, flag)
 
+	// HTTP Server.
 	timeout := time.Duration(time.Minute)
 	server := &http.Server{
 		Addr:         listen,
@@ -54,10 +55,8 @@ func main() {
 		ReadTimeout:  time.Second * time.Duration(timeout),
 		WriteTimeout: time.Second * time.Duration(timeout),
 	}
-
 	signals := make(chan os.Signal)
 	signal.Notify(signals, os.Interrupt)
-
 	go func() {
 		<-signals
 		cancel()
