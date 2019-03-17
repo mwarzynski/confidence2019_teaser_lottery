@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/mwarzynski/confidence_web/app"
-	"github.com/mwarzynski/confidence_web/transport"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/transport"
 )
 
 var (

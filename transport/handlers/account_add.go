@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/mwarzynski/confidence_web/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
 )
 
 func (h *Handlers) AccountAdd(w http.ResponseWriter, r *http.Request) {

@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/mwarzynski/confidence_web/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
 	"github.com/pkg/errors"
 )
 

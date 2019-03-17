@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/mwarzynski/confidence_web/app"
-	"github.com/mwarzynski/confidence_web/transport/handlers"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/transport/handlers"
 )
 
 func InitRouter(service *app.Service, flag string) http.Handler {

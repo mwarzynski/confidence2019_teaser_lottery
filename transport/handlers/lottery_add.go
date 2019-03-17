@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mwarzynski/confidence_web/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
 )
 
 type RequestLotteryAdd struct {

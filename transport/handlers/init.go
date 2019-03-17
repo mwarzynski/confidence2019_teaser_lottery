@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/mwarzynski/confidence_web/app"
+	"github.com/mwarzynski/confidence2019_teaser_lottery/app"
 )
 
 type Handlers struct {
