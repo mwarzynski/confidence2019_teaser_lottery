@@ -109,6 +109,13 @@ However, slice is kind of like the `vector` in C++. If you will append the
 element over the available capacity, it will reallocate itself to the another
 bigger memory chunk. Therefore we must ensure, reallocation won't happen.
 
+Our strategy is creating two slices which point to the same memory. We copy
+`Account` struct when adding to the `Lottery`, so the slice will be also
+copied. When it comes to the capacity - we need to have such length and
+capacity that `append` won't reallocate the slice (and just write to the
+memory). `MaxAmountsLen = 4`, so we may exploit it by `capacity=4` and
+`length=3`. In this case adding another item will just overwrite fourth element.
+
 Anyway, here is the code:
 ```go
 func HackLottery() {
@@ -146,6 +153,8 @@ func HackLottery() {
   // Yay, you are a millionaire.
 }
 ```
+
+Do you know why it doesn't work for slices with capacity less than 4?
 
 ## Flag
 
