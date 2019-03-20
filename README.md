@@ -79,8 +79,8 @@ For each try we must do three HTTP requests:
 0.90
 ```
 
-As you can see, it was possible to get a flag within one hour! It wasn't
-intended solution, but probably some teams managed to use it.
+As you can see, with a high confidence it was possible to get a flag within one hour!
+It wasn't intended solution, but probably some teams managed to use it.
 Congratulations though.
 
 ### Solution 2 (go slices)
@@ -104,7 +104,7 @@ Definition of slice:
 ![Slice visualization](images/go-slices-usage-and-internals_slice-struct.png)
 
 In fact, a slice is a pointer to the memory and not the memory itself! It means
-we are able to write to the *original* `amounts` memory at the lottery.
+we are able to write to the *original* `amounts` memory while the lottery evaluation.
 However, slice is kind of like the `vector` in C++. If you will append the
 element over the available capacity, it will reallocate itself to the another
 bigger memory chunk. Therefore we must ensure, reallocation won't happen.
