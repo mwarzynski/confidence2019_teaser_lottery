@@ -1,7 +1,7 @@
 import requests
 import time
 
-URL = "http://localhost:8080"
+URL = "https://lottery.zajebistyc.tf"
 
 
 class Account:
