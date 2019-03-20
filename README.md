@@ -163,3 +163,11 @@ $ python hack.py
 p4{fucking-go-slices.com}
 ```
 
+## Survey
+
+![Which challenge was the coolest](images/bestchall.png)
+
+Accordingly to the poll, 'The Lottery' was the second coolest challenge!
+Thank you.
+
+https://github.com/p4-team/ctf/tree/writeup/2019-03-17-confidence2019
