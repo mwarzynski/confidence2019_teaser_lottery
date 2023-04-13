@@ -83,6 +83,8 @@ As you can see, with a high confidence it was possible to get a flag within one 
 It wasn't intended solution, but probably some teams managed to use it.
 Congratulations though.
 
+For more information, you can read the CTF Post Mortem: https://github.com/p4-team/ctf/tree/master/2019-03-17-confidence2019#4-monitoring
+
 ### Solution 2 (go slices)
 
 Let's go back to previously noticed amounts `append` with a big number.
@@ -170,4 +172,4 @@ p4{fucking-go-slices.com}
 Accordingly to the poll, 'The Lottery' was the second coolest challenge!
 Thank you.
 
-https://github.com/p4-team/ctf/tree/writeup/2019-03-17-confidence2019
+[https://github.com/p4-team/ctf/tree/writeup/2019-03-17-confidence2019](https://github.com/p4-team/ctf/tree/master/2019-03-17-confidence2019)
